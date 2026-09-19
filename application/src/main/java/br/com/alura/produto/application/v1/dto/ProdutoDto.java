@@ -20,6 +20,8 @@ public final class ProdutoDto {
 
     @Getter
     @Builder
+    @lombok.NoArgsConstructor
+    @lombok.AllArgsConstructor
     public static class Request implements ProdutoDef.Request {
 
         private String nome;

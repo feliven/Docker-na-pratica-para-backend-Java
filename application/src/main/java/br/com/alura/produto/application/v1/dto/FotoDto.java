@@ -18,6 +18,8 @@ public final class FotoDto {
 
     @Getter
     @Builder
+    @lombok.NoArgsConstructor
+    @lombok.AllArgsConstructor
     public static class Request implements FotoDef.Request {
 
         private String fileName;

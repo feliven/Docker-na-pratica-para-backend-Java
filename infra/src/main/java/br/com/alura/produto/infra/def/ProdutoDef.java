@@ -21,14 +21,14 @@ public interface ProdutoDef {
         BigDecimal getValor();
     }
 
-    interface Detalhado extends Serializable, Representado {
+    interface Detalhado extends Representado {
 
         String getDescricao();
 
         List<String> getTags();
     }
 
-    interface RepresentadoPersistido extends Serializable, Representado {
+    interface RepresentadoPersistido extends Representado {
 
         UUID getProdutoId();
 
@@ -37,7 +37,7 @@ public interface ProdutoDef {
         LocalDateTime getAtualizadoEm();
     }
 
-    interface DetalhadoPersistido extends Serializable, RepresentadoPersistido {
+    interface DetalhadoPersistido extends RepresentadoPersistido {
 
     }
 

@@ -9,11 +9,11 @@ public interface FotoDef {
         String getFileName();
     }
 
-    interface Detalhado extends Serializable, Representado {
+    interface Detalhado extends Representado {
 
     }
 
-    interface RepresentadoPersistido extends Serializable, Representado {
+    interface RepresentadoPersistido extends Representado {
         Long getFotoId();
 
         String getLink();
@@ -23,7 +23,7 @@ public interface FotoDef {
         LocalDateTime getAtualizadoEm();
     }
 
-    interface DetalhadoPersistido extends Serializable, RepresentadoPersistido {
+    interface DetalhadoPersistido extends RepresentadoPersistido {
 
     }
 

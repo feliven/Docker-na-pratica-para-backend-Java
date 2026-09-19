@@ -90,7 +90,7 @@ public class ExceptionAdvice {
     }
 
     @ExceptionHandler(BusinessException.class)
-    @ResponseStatus(value = UNPROCESSABLE_ENTITY)
+    @ResponseStatus(value = UNPROCESSABLE_CONTENT)
     public String handle(BusinessException e) {
         if (e.getCause() != null)
             log.warn(e.getMessage(), e);

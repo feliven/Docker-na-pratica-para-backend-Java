@@ -1,14 +1,13 @@
 package br.com.alura.produto.infra.config;
 
 import org.springframework.boot.persistence.autoconfigure.EntityScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@Configuration
+@TestConfiguration
 @EnableJpaAuditing
-@EntityScan("br.com.alura.produto.domain.entity")
-@EnableJpaRepositories("br.com.alura.produto.infra.repository")
-public class JpaConfig {
-
+@EntityScan("br.com.alura")
+@EnableJpaRepositories("br.com.alura")
+public class TestJpaConfig {
 }

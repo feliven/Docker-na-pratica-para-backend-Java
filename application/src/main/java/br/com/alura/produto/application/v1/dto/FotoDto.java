@@ -2,6 +2,7 @@ package br.com.alura.produto.application.v1.dto;
 
 import br.com.alura.produto.infra.def.FotoDef;
 import br.com.alura.produto.application.v1.mapper.ProdutoDtoMapper;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,8 +19,8 @@ public final class FotoDto {
 
     @Getter
     @Builder
-    @lombok.NoArgsConstructor
-    @lombok.AllArgsConstructor
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class Request implements FotoDef.Request {
 
         private String fileName;

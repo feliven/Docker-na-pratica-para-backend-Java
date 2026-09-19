@@ -3,6 +3,7 @@ package br.com.alura.produto.application.v1.dto;
 import br.com.alura.produto.domain.entity.Produto;
 import br.com.alura.produto.infra.def.ProdutoDef;
 import jakarta.validation.constraints.DecimalMin;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,8 +21,8 @@ public final class ProdutoDto {
 
     @Getter
     @Builder
-    @lombok.NoArgsConstructor
-    @lombok.AllArgsConstructor
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class Request implements ProdutoDef.Request {
 
         private String nome;

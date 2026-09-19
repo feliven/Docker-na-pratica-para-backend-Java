@@ -27,6 +27,8 @@ public final class ReflectionUtil {
         try {
             var fields = actual.getClass().getDeclaredFields();
             for (var field : fields) {
+                if (field.isSynthetic())
+                    continue;
                 field.setAccessible(true);
                 var actualFieldValue = field.get(actual);
 
@@ -60,6 +62,8 @@ public final class ReflectionUtil {
         try {
             var fields = clazz.getDeclaredFields();
             for (var field : fields) {
+                if (field.isSynthetic())
+                    continue;
                 field.setAccessible(true);
 
                 var actualFieldValue = field.get(actual);
@@ -86,6 +90,8 @@ public final class ReflectionUtil {
         try {
             var fields = actual.getClass().getDeclaredFields();
             for (var field : fields) {
+                if (field.isSynthetic())
+                    continue;
                 field.setAccessible(true); // NOSONAR
 
                 var actualFieldValue = field.get(actual);

@@ -1,0 +1,10 @@
+services:
+  db:
+    image: postgres
+    container_name: docker_java
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=alura_series
+    ports:
+      - 5432:5432

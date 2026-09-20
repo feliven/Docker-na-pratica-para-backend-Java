@@ -10,15 +10,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
-import static org.mapstruct.factory.Mappers.getMapper;
-
 @RequiredArgsConstructor
 @Repository
 @Primary
 @Observed
 public class QueueRepositoryImpl implements QueueRepository {
 
-    private final ProdutoMsgMapper mapper = getMapper(ProdutoMsgMapper.class);
+    // O Spring e o Lombok assumem a injeção automaticamente
+    private final ProdutoMsgMapper mapper;
 
     private final RabbitTemplate rabbitTemplate;
 

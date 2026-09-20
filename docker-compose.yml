@@ -1,29 +1,39 @@
 services:
-  db:
+  banco-dados:
     image: postgres
-    container_name: my-postgres
+    ports:
+      - 5432:5432
     environment:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=secret
       - POSTGRES_DB=api_produtos
-    ports:
-      - 5432:5432
-  localstack:
+  simulador-aws:
     image: localstack/localstack
-    container_name: my-localstack
     ports:
-      - 127.0.0.1:4566:4566 # LocalStack Gateway
-      - 127.0.0.1:4510-4559:4510-4559 # external services port range
-      - 127.0.0.1:443:443 # LocalStack HTTPS Gateway
+      - 4566:4566 # LocalStack Gateway
+      - 4510-4559:4510-4559 # external services port range
+      - 443:443 # LocalStack HTTPS Gateway
     environment:
       # Activate LocalStack for AWS: https://docs.localstack.cloud/getting-started/auth-token/
       - LOCALSTACK_AUTH_TOKEN=ls-qILiHaFO-DORI-8751-5708-MUHomaFA1e24
       # LocalStack configuration: https://docs.localstack.cloud/references/configuration/
       - DEBUG=${DEBUG:-0}
       - PERSISTENCE=${PERSISTENCE:-0}
-  rabbitmq:
+  cache:
+    image: redis
+    ports:
+      - 6379:6379
+    environment:
+      - REDIS_ARGS=--requirepass senha-redis --appendonly yes
+  rastreamento-tracing:
+    image: openzipkin/zipkin
+    ports:
+      # Port used for the Zipkin UI and HTTP Api
+      - 9411:9411
+    environment:
+      - STORAGE_TYPE=mem
+  mensageria:
     image: rabbitmq
-    container_name: my-rabbitmq
     ports:
       - 5672:5672
       - 15672:15672
@@ -33,21 +43,16 @@ services:
     configs:
       - source: rabbitmq-plugins
         target: /etc/rabbitmq/enabled_plugins
-  redis:
-    image: redis
-    container_name: my-redis
+  api:
+    image: api-produto
     ports:
-      - 6379:6379
-    environment:
-      - REDIS_ARGS=--requirepass senha-redis --appendonly yes
-  zipkin:
-    image: ghcr.io/openzipkin/zipkin-slim
-    container_name: zipkin
-    environment:
-      - STORAGE_TYPE=mem
-    ports:
-      # Port used for the Zipkin UI and HTTP Api
-      - 9411:9411
+      - 8080:8080
+    depends_on:
+      - banco-dados
+      - simulador-aws
+      - cache
+      - rastreamento-tracing
+      - mensageria
 
 configs:
   rabbitmq-plugins:

@@ -5,7 +5,7 @@ services:
     environment:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=secret
-      - POSTGRES_DB=alura_series
+      - POSTGRES_DB=api_produtos
     ports:
       - 5432:5432
   localstack:

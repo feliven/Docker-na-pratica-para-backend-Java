@@ -40,6 +40,14 @@ services:
       - 6379:6379
     environment:
       - REDIS_ARGS=--requirepass senha-redis --appendonly yes
+  zipkin:
+    image: ghcr.io/openzipkin/zipkin-slim
+    container_name: zipkin
+    environment:
+      - STORAGE_TYPE=mem
+    ports:
+      # Port used for the Zipkin UI and HTTP Api
+      - 9411:9411
 
 configs:
   rabbitmq-plugins:

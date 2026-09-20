@@ -1,7 +1,7 @@
 services:
   db:
     image: postgres
-    container_name: docker_java
+    container_name: my-postgres
     environment:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=secret
@@ -10,7 +10,7 @@ services:
       - 5432:5432
   localstack:
     image: localstack/localstack
-    container_name: localstack-main
+    container_name: my-localstack
     ports:
       - 127.0.0.1:4566:4566 # LocalStack Gateway
       - 127.0.0.1:4510-4559:4510-4559 # external services port range
@@ -23,7 +23,7 @@ services:
       - PERSISTENCE=${PERSISTENCE:-0}
   rabbitmq:
     image: rabbitmq
-    container_name: rabbitmq
+    container_name: my-rabbitmq
     ports:
       - 5672:5672
       - 15672:15672
@@ -33,6 +33,13 @@ services:
     configs:
       - source: rabbitmq-plugins
         target: /etc/rabbitmq/enabled_plugins
+  redis:
+    image: redis
+    container_name: my-redis
+    ports:
+      - 6379:6379
+    environment:
+      - REDIS_ARGS=--requirepass senha-redis --appendonly yes
 
 configs:
   rabbitmq-plugins:
